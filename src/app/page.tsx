@@ -142,9 +142,15 @@ export default function AnkiPage() {
             </div>
           </div>
         )}
+        <a
+          href="/triage?pack=idioms"
+          className="mt-4 px-6 py-2 bg-blue-600 rounded-lg text-white text-sm inline-block"
+        >
+          📦 Add words from a pack
+        </a>
         <button
           onClick={closeMiniApp}
-          className="mt-6 px-6 py-2 bg-zinc-800 rounded-lg text-white text-sm"
+          className="mt-3 px-6 py-2 bg-zinc-800 rounded-lg text-white text-sm"
         >
           Close
         </button>
