@@ -1,4 +1,5 @@
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8847";
+// Use relative paths — calls go to Next.js API route proxies (avoids mixed content)
+const API_BASE = "";
 
 export async function fetchDueCards(userId: number) {
   const res = await fetch(`${API_BASE}/api/due-cards?user_id=${userId}`);
