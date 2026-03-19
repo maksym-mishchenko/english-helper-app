@@ -237,16 +237,29 @@ export default function AnkiPage() {
           <div className="w-full max-w-sm">
             {/* Category badge */}
             <div className="text-center mb-2">
-              <span className="text-[10px] px-2 py-0.5 rounded-full bg-zinc-800 text-zinc-400 uppercase">
-                {card.category}
+              <span className={`text-[10px] px-2 py-0.5 rounded-full uppercase ${
+                card.category === "grammar" 
+                  ? "bg-red-900/50 text-red-400" 
+                  : "bg-zinc-800 text-zinc-400"
+              }`}>
+                {card.category === "grammar" ? "✏️ grammar" : card.category}
               </span>
             </div>
 
-            {/* Word */}
-            <div className="bg-zinc-900 rounded-2xl p-8 text-center mb-6 border border-zinc-800">
-              <h2 className="text-2xl font-bold text-white mb-2">
+            {/* Word / Mistake */}
+            <div className={`rounded-2xl p-8 text-center mb-6 border ${
+              card.category === "grammar"
+                ? "bg-red-950/30 border-red-900/50"
+                : "bg-zinc-900 border-zinc-800"
+            }`}>
+              <h2 className={`text-2xl font-bold mb-2 ${
+                card.category === "grammar" ? "text-red-300" : "text-white"
+              }`}>
                 {card.word}
               </h2>
+              {card.category === "grammar" && (
+                <div className="text-[10px] text-zinc-500">what&apos;s wrong here?</div>
+              )}
               {card.repetitions > 0 && (
                 <div className="text-[10px] text-zinc-500">
                   reviewed {card.repetitions}x
