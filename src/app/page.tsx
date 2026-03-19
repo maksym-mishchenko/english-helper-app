@@ -291,12 +291,27 @@ export default function AnkiPage() {
             ) : (
               <div className="space-y-4">
                 {/* Answer */}
-                <div className="bg-zinc-900 rounded-xl p-4 border border-zinc-800">
-                  <div className="text-sm font-medium text-emerald-400 mb-1">
-                    {card.definition}
-                  </div>
+                <div className="bg-zinc-900 rounded-xl p-4 border border-zinc-800 space-y-2">
+                  {card.definition.split("\n").map((line, i) => {
+                    const trimmed = line.trim();
+                    if (!trimmed) return null;
+                    // Part of speech
+                    if (trimmed.startsWith("(") && trimmed.endsWith(")"))
+                      return <div key={i} className="text-xs text-zinc-500 uppercase tracking-wide">{trimmed}</div>;
+                    // Pronunciation
+                    if (trimmed.startsWith("🔊"))
+                      return <div key={i} className="text-xs text-blue-400">{trimmed}</div>;
+                    // Collocations
+                    if (trimmed.startsWith("🔗"))
+                      return <div key={i} className="text-xs text-amber-400/80">{trimmed}</div>;
+                    // Ukrainian
+                    if (trimmed.startsWith("🇺🇦"))
+                      return <div key={i} className="text-sm text-sky-400 font-medium mt-1">{trimmed}</div>;
+                    // Main definition
+                    return <div key={i} className="text-sm font-medium text-emerald-400">{trimmed}</div>;
+                  })}
                   {card.example && (
-                    <div className="text-xs text-zinc-400 italic mt-2">
+                    <div className="text-xs text-zinc-400 italic mt-2 pt-2 border-t border-zinc-800">
                       &ldquo;{card.example}&rdquo;
                     </div>
                   )}
