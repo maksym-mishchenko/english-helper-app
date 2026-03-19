@@ -219,14 +219,6 @@ export default function AnkiPage() {
             </span>
           )}
         </div>
-        <button
-          onClick={() =>
-            setQuizMode(quizMode === "reveal" ? "type" : "reveal")
-          }
-          className="text-[10px] px-2 py-1 rounded bg-zinc-800 text-zinc-400"
-        >
-          {quizMode === "reveal" ? "🔤 Type" : "👁️ Reveal"}
-        </button>
       </div>
 
       {/* Progress bar */}
@@ -263,25 +255,7 @@ export default function AnkiPage() {
             </div>
 
             {/* Quiz area */}
-            {quizMode === "type" && !showAnswer ? (
-              <div className="space-y-3">
-                <input
-                  type="text"
-                  value={typedAnswer}
-                  onChange={(e) => setTypedAnswer(e.target.value)}
-                  onKeyDown={(e) => e.key === "Enter" && handleTypeSubmit()}
-                  placeholder="Type the definition..."
-                  className="w-full px-4 py-3 rounded-xl bg-zinc-900 border border-zinc-700 text-white text-center focus:border-blue-500 focus:outline-none"
-                  autoFocus
-                />
-                <button
-                  onClick={handleTypeSubmit}
-                  className="w-full py-3 rounded-xl bg-blue-600 text-white font-medium"
-                >
-                  Check
-                </button>
-              </div>
-            ) : !showAnswer ? (
+            {!showAnswer ? (
               <button
                 onClick={handleReveal}
                 className="w-full py-4 rounded-xl bg-zinc-800 border border-zinc-700 text-zinc-300 text-sm font-medium"
@@ -313,18 +287,6 @@ export default function AnkiPage() {
                   {card.example && (
                     <div className="text-xs text-zinc-400 italic mt-2 pt-2 border-t border-zinc-800">
                       &ldquo;{card.example}&rdquo;
-                    </div>
-                  )}
-                  {quizMode === "type" && (
-                    <div className="mt-2 text-xs">
-                      {typedAnswer.trim().toLowerCase() ===
-                      card.definition.toLowerCase().trim() ? (
-                        <span className="text-emerald-400">✅ Correct!</span>
-                      ) : (
-                        <span className="text-red-400">
-                          ❌ Your answer: &ldquo;{typedAnswer}&rdquo;
-                        </span>
-                      )}
                     </div>
                   )}
                 </div>
