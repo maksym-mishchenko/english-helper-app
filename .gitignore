@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# vitest coverage
+/coverage
+
+# node gyp build artifacts
+/1/
